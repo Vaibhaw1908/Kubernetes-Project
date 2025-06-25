@@ -9,5 +9,5 @@ WORKDIR /var/www/html/
 RUN unzip photogenic.zip && \
     cp -rvf photogenic/* . && \
     rm -rf photogenic photogenic.zip
-EXPOSE 80 443
+EXPOSE 80
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
