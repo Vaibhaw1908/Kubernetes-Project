@@ -1,13 +1,18 @@
-FROM centos:7
+FROM almalinux:8
 LABEL maintainer="vaibhaw.rxl@gmail.com"
-RUN yum install -y httpd \
-    zip \
-    unzip && \
-    yum clean all
-ADD https://github.com/Vaibhaw1908/files/blob/cda241da1c4a35c64dd3851fe5b2c884c88c4452/photogenic-master.zip /var/www/html/photogenic-master.zip
+
+RUN dnf install -y httpd unzip zip && dnf clean all
+
+# Add a working direct zip download (see below)
+ADD https://github.com/vaibhaw1908/files/raw/main/photogenic-master.zip /var/www/html/
+
 WORKDIR /var/www/html/
-RUN unzip photogenic.zip && \
-    cp -rvf photogenic/* . && \
-    rm -rf photogenic photogenic.zip
-EXPOSE 80 
+
+RUN unzip photogenic-master.zip && \
+    cp -rvf photogenic-master/* . && \
+    rm -rf photogenic-master photogenic-master.zip
+
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
+
+EXPOSE 80 443
+
