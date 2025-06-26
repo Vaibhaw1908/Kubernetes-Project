@@ -14,4 +14,4 @@ RUN unzip photogenic-master.zip && \
 
 CMD ["/usr/sbin/httpd", "-D", "FOREGROUND"]
 
-EXPOSE 80 443 
+EXPOSE 80 
